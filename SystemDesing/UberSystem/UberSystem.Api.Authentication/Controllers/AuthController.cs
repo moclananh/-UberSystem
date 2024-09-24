@@ -6,7 +6,6 @@ using UberSystem.Domain.Entities;
 using UberSystem.Domain.Enums;
 using UberSystem.Domain.Interfaces.Services;
 using UberSystem.Service;
-using UberSytem.Dto;
 using UberSytem.Dto.Requests;
 using UberSytem.Dto.Responses;
 

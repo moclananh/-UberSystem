@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
 
 namespace UberSystem.Domain.Entities;
 
@@ -19,8 +20,8 @@ public partial class User
     
     [Column("emailVerifiedToken")]
     public string? EmailVerificationToken { get; set; }
-    
+    [JsonIgnore]
     public virtual ICollection<Customer> Customers { get; } = new List<Customer>();
-
+    [JsonIgnore]
     public virtual ICollection<Driver> Drivers { get; } = new List<Driver>();
 }

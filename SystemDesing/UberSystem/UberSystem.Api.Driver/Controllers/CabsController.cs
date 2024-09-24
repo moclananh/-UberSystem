@@ -3,19 +3,19 @@ using Microsoft.EntityFrameworkCore;
 using UberSystem.Domain.Interfaces.Services;
 using UberSystem.Infrastructure;
 
-namespace UberSystem.Api.Customer.Controllers
+namespace UberSystem.Api.Driver.Controllers
 {
-    public class CustomersController : BaseApiController
-    {
+    public class CabsController : BaseApiController
+    {/*
         private readonly UberSystemDbContext _context;
         private readonly IUserService _userService;
 
-        public CustomersController(UberSystemDbContext context, IUserService userService)
+        public CabsController(UberSystemDbContext context, IUserService userService)
         {
             _context = context;
             _userService = userService;
         }
-        
+
         /// <summary>
         /// Retrieve customers in system
         /// </summary>
@@ -23,17 +23,17 @@ namespace UberSystem.Api.Customer.Controllers
         /// <remarks>
         /// 
         /// </remarks>
-        [HttpGet("customers")]
+        [HttpGet("cab")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status403Forbidden)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<ActionResult<IEnumerable<Domain.Entities.Customer>>> GetCustomers()
+        public async Task<ActionResult<IEnumerable<Domain.Entities.Cab>>> GetCabs()
         {
-            if (_context.Customers == null)
+            if (_context.Cabs == null)
             {
                 return NotFound();
             }
-            return await _context.Customers.ToListAsync();
+            return await _context.Cabs.ToListAsync();
         }
 
         /// <summary>
@@ -43,64 +43,63 @@ namespace UberSystem.Api.Customer.Controllers
         /// <remarks>
         /// 
         /// </remarks>
-        [HttpGet("customers/{id}")]
+        [HttpGet("cab/{id}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        public async Task<ActionResult<Domain.Entities.Customer>> GetCustomer(long id)
+        public async Task<ActionResult<Domain.Entities.Cab>> GetCab(long id)
         {
-            if (_context.Customers == null)
+            if (_context.Cabs == null)
             {
                 return NotFound();
             }
-            var customer = await _context.Customers.FindAsync(id);
+            var item = await _context.Cabs.FindAsync(id);
 
-            if (customer == null)
+            if (item == null)
             {
                 return NotFound();
             }
 
-            return customer;
+            return item;
         }
 
         /// <summary>
         /// Create a new customer
         /// </summary>
-        /// <param name="customer"></param>
+        /// <param name="cabs"></param>
         /// <returns></returns>
-        [HttpPost("customers")]
+        [HttpPost("cab")]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<ActionResult<Domain.Entities.Customer>> CreateCustomer(Domain.Entities.Customer customer)
+        public async Task<ActionResult<Domain.Entities.Cab>> CreateCustomer(Domain.Entities.Cab cab)
         {
-            if (customer == null)
+            if (cab == null)
             {
                 return BadRequest();
             }
 
-            _context.Customers.Add(customer);
+            _context.Cabs.Add(cab);
             await _context.SaveChangesAsync();
-
-            return CreatedAtAction(nameof(GetCustomer), new { id = customer.Id }, customer);
+            return CreatedAtAction(nameof(GetCab), new { id = cab.Id }, cab);
         }
 
-       
+
 
         /// <summary>
         /// Delete a customer
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        [HttpDelete("customers/{id}")]
+        [HttpDelete("cab/{id}")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<IActionResult> DeleteCustomer(long id)
+        public async Task<IActionResult> Delete(long id)
         {
-            var customer = await _context.Customers.FindAsync(id);
-            if (customer == null)
+            var ca = await _context.Cabs.FindAsync(id);
+            if (ca == null)
             {
                 return NotFound();
             }
 
-            _context.Customers.Remove(customer);
+            _context.Cabs.Remove(ca);
             await _context.SaveChangesAsync();
 
             return NoContent();
@@ -112,31 +111,32 @@ namespace UberSystem.Api.Customer.Controllers
         /// Update a customer
         /// </summary>
         /// <param name="id"></param>
-        /// <param name="customer"></param>
+        /// <param name="cab"></param>
         /// <returns></returns>
-        [HttpPut("customers/{id}")]
+        [HttpPut("cab/{id}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<ActionResult<Domain.Entities.Customer>> UpdateCustomer(long id, Domain.Entities.Customer customer)
+        public async Task<ActionResult<Domain.Entities.Cab>> Update(long id, Domain.Entities.Cab cab)
         {
-            if (customer == null || id != customer.Id)
+            if (cab == null || id != cab.Id)
             {
                 return BadRequest();
             }
 
-            var existingCustomer = await _context.Customers.FindAsync(id);
-            if (existingCustomer == null)
+            var existingCab = await _context.Cabs.FindAsync(id);
+            if (existingCab == null)
             {
                 return NotFound();
             }
 
-            existingCustomer.CreateAt = customer.CreateAt;
-            existingCustomer.UserId = customer.UserId;
+            existingCab.Type = cab.Type;
+            existingCab.DriverId = cab.DriverId;
+            existingCab.RegNo = cab.RegNo;
 
             await _context.SaveChangesAsync();
 
-            return Ok(existingCustomer);
-        }
+            return Ok(existingCab);
+        }*/
     }
 }
